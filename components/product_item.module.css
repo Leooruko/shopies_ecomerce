@@ -1,0 +1,20 @@
+.product{
+    /* background-color: rgb(247, 237, 237); */
+    background-color: rgba(0, 0, 0, 0.854);
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    align-items: start;
+    border-radius: 4px;
+    gap: 1rem;
+    padding:0 0 1rem 0
+}
+.product .description{
+    padding-inline: 1rem;
+}
+.product img{
+    border-radius: 4px;
+    height: 10rem;
+    width: 100%;
+    object-fit: cover;
+}

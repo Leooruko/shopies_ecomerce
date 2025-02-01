@@ -1,0 +1,28 @@
+.marquee{
+    width: 100%;
+    padding-block: 0.3rem;
+    animation:scroll 20s linear infinite;  
+    text-wrap: nowrap;  
+    /* color: rgb(206, 126, 29); */
+    /* background-color: rgb(247, 237, 237); */
+}
+.marquee_container{
+    background-color: rgb(247, 237, 237);
+}
+@keyframes scroll{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+.navbar img{
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.hints{
+    z-index: 1000;
+}
