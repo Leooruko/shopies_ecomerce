@@ -3,7 +3,7 @@ import { createAuthSession, destroySession, verifyAuthSession } from "@/lib/auth
 import { hashPassword,verifyPassword } from "./hash"
 import { createUser, getUserByEmail } from "@/lib/store_actions";
 import { redirect } from "next/navigation";
-
+import { getUserById } from "@/lib/store_actions";
 interface Errors {
     email?: string;
     password?: string;
@@ -67,3 +67,18 @@ export async function logout(){
     await destroySession()
     redirect('/auth')
 }
+
+export async function userVerification() {
+    let user;
+    const result = await verifyAuthSession();
+    if (result && result.user?.id) {
+      try {
+        const userData = await getUserById(result.user.id);
+        // Convert to a plain object if necessary
+        user = JSON.parse(JSON.stringify(userData));
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    }
+    return user;
+  }

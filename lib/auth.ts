@@ -1,3 +1,4 @@
+// "use server";
 import { Lucia } from "lucia"
 import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite"
 import sql from 'better-sqlite3';

@@ -141,5 +141,17 @@ db.exec(
     `
 );
 
+db.exec(
+    `
+    CREATE TABLE IF NOT EXISTS cart(
+        id INTEGER PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        product_id INTEGER NOT NULL,
+        quantity INTEGER CHECK(quantity >= 0),
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(product_id) REFERENCES products(id)
+    );
+    `
+)
 
 export default db;

@@ -1,5 +1,5 @@
 "use client";
-import ProductSingleCard from "@/components/product_singleCard";
+import ProductSingleCard from "@/components/productSingleCard";
 import { useAppContext } from "@/hooks/useAppContext";
 import { useProduct } from "@/hooks/useStore";
 import { useParams } from "next/navigation";

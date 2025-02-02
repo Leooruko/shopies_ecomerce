@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "@tanstack/react-query": "^5.66.0",
     "better-sqlite3": "^11.8.1",
     "lucia": "^3.2.2",
     "next": "15.1.6",

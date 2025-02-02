@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import "../globals.css";
 import MainHeader from "@/components/main-header";
-import { verifyAuthSession } from "@/lib/auth";
-import { getUserById } from "@/lib/store_actions";
+import { getUser } from "@/lib/actions";
+import { AppProvider } from "@/hooks/useAppContext";
 export const metadata: Metadata = {
   title: "Shopies",
   description:
@@ -14,19 +13,13 @@ export default async function AuthRootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const result = await verifyAuthSession();
-  let user;
-  if (result && result.user?.id) {
-    user = await getUserById(result.user.id);
-  }
+  const user = await getUser();
   return (
-    <html lang="en">
-      <body>
-        <MainHeader user={user} />
-        <div className="w-full px-5 sm:px-10 pt-72 sm:pt-44 flex sm:gap-10">
-          {children}
-        </div>
-      </body>
-    </html>
+    <AppProvider initialUser={user}>
+      <MainHeader user={user} />
+      <div className="w-full px-5 sm:px-10 pt-72 sm:pt-44 flex sm:gap-10">
+        {children}
+      </div>
+    </AppProvider>
   );
 }

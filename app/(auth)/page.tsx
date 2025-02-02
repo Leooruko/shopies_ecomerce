@@ -1,8 +1,14 @@
+"use client";
 import ProductsGrid from "@/components/products_grid";
-import { getAllProducts } from "@/lib/store_actions";
 import SideNavigation from "@/components/side-menu";
+import { useStore } from "@/hooks/useStore";
+import { useAppContext } from "@/hooks/useAppContext";
 export default function Home() {
-  const products = getAllProducts();
+  const appContext = useAppContext();
+  const { user } = appContext;
+  const { data: products, isLoading, error } = useStore(+user.id);
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
   return (
     <>
       <div className="hidden sm:flex">

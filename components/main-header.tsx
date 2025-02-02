@@ -96,7 +96,7 @@ export default function MainHeader({ user }) {
                     >
                       <div>
                         <h1 className="text-xl text-teal-800 text-nowrap">
-                          {user}
+                          {user.user}
                         </h1>
                       </div>
                       <span className="w-10 ">
