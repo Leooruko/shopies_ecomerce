@@ -11,7 +11,7 @@ export default function AuthRootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="no-scrollbar">
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>

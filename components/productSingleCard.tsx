@@ -4,6 +4,7 @@ import { useAddQuantity, useAddToCart } from "@/hooks/useStore";
 import classes from "./productSingleCard.module.css";
 import { useAppContext } from "@/hooks/useAppContext";
 import Link from "next/link";
+import Image from "next/image";
 export default function ProductSingleCard({ product }) {
   const { user } = useAppContext() || {};
   const { mutate: addToCart, isPending } = useAddToCart();
@@ -18,24 +19,28 @@ export default function ProductSingleCard({ product }) {
   };
   const { mutate: addItemQuantity, isLoading } = useAddQuantity();
   const handleAddQuantity = () => {
-    if (user?.id && product.id) {
+    if (user?.id && (product.id || product.product_id)) {
       addItemQuantity({
         user_id: +user.id,
-        product_id: product.product_id ? +product.product_id : +product.id,
-        id: product.product_id ? product.id : null,
+        product_id: +product.product_id || +product.id,
+        id: product.id || null,
         slug: product.slug as string,
       });
     }
+    console.log("Passed");
   };
   return (
     <div
-      className={`${classes.product_item} text-white flex flex-col sm:flex-row justify-between gap-5 rounded-md max-h-fit !w-fit  sm:max-h-96 md:max-h-72 p-7 items-start `}
+      className={`${classes.product_item} text-white flex flex-col sm:flex-row justify-between gap-5 rounded-md max-h-fit w-full  sm:max-h-96 md:max-h-72 p-7 items-start `}
     >
-      <img
-        src={`/images${product!.image}`}
-        className={`${classes.image} `}
-        alt={product!.slug}
-      />
+      <div className=" h-full min-h-52 aspect-auto min-w-52 relative -z-50">
+        <Image
+          src={`/images${product!.image}`}
+          className={`${classes.image} `}
+          alt={product?.name || "Product Image"}
+          fill
+        />
+      </div>
       <section className="flex flex-col gap-10 sm:gap-5 h-full text-black  justify-evenly  sm:overflow-hidden ">
         <h1 className="text-2xl  font-mono text-blue-500">{product?.name}</h1>
         <p className="text-sm text-gray-700 font-sans italic">

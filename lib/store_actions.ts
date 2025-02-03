@@ -63,7 +63,7 @@ export  async function getUserById(id:string){
 export async function fetchCart(id:number){
     const products=db.prepare(
         `
-            SELECT c.id AS cart_id,c.quantity, p.name,p.image,p.price FROM cart c
+            SELECT c.id AS cart_id,c.quantity, p.name,p.image,p.price,p.id AS product_id FROM cart c
             JOIN products p ON c.product_id=p.id
             WHERE c.user_id=?;
         `

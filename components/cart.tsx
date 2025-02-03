@@ -10,7 +10,7 @@ export default function CartQuery({ userId }: CartProps) {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   return (
-    <div className="flex flex-col w-full gap-10 mb-10">
+    <div className="flex flex-col w-full px-20 gap-10 mb-10">
       {cart.length > 0 ? (
         cart.map((item: { name: string; quantity: number }) => (
           <ProductSingleCard key={item.name} product={item} />

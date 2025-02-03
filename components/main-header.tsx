@@ -105,11 +105,11 @@ export default function MainHeader({ user }) {
                     </Link>
                     <hr color="purple" />
                     <ul className="flex flex-col gap-2 mt-2">
-                      <li className="hover:bg-blue-400 p-2 rounded-md hover:text-white">
+                      {/* <li className="hover:bg-blue-400 p-2 rounded-md hover:text-white">
                         <Link href={"/notifications"} className="">
                           <h1>Notifications</h1>
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="hover:bg-blue-400 p-2 rounded-md hover:text-white">
                         <Link href={"/cart"} className="">
                           <h1>Cart</h1>

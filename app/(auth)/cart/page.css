@@ -1,0 +1,30 @@
+/* Hide default scrollbar for WebKit browsers */
+section::-webkit-scrollbar {
+    width: 6px; /* Slim scrollbar */
+  }
+  
+  /* Scrollbar Track */
+  section::-webkit-scrollbar-track {
+    background: transparent; /* Removes track background */
+    border-radius: 0;
+  }
+  
+  /* Scrollbar Handle */
+  section::-webkit-scrollbar-thumb {
+    background: black; /* Black sleek scrollbar */
+    border-radius: 10px; /* Rounded edges */
+  }
+  
+  /* On hover */
+  section::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.8); /* Slight transparency effect */
+  }
+  
+  /* Firefox scrollbar (optional) */
+  section {
+    scrollbar-width: thin;
+    scrollbar-color: black transparent;
+  }
+  /* body{
+    overflow-y: hidden;
+  } */
