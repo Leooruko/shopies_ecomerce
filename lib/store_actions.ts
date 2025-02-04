@@ -21,7 +21,7 @@ export async function getAllProducts(user_id: number){
 export async function getProduct(slug:string,user_id:number){  
     const product=db.prepare(
         `
-           SELECT p.*, COALESCE(c.quantity, 0) AS inCart
+           SELECT p.*,c.id AS cart_id, COALESCE(c.quantity, 0) AS inCart
             FROM products p
             LEFT JOIN cart c 
                 ON c.product_id = p.id 

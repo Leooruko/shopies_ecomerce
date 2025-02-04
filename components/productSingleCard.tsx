@@ -1,6 +1,10 @@
 // import Image from "next/image";
 "use client";
-import { useAddQuantity, useAddToCart } from "@/hooks/useStore";
+import {
+  useAddQuantity,
+  useAddToCart,
+  useReduceQuantity,
+} from "@/hooks/useStore";
 import classes from "./productSingleCard.module.css";
 import { useAppContext } from "@/hooks/useAppContext";
 import Link from "next/link";
@@ -29,6 +33,18 @@ export default function ProductSingleCard({ product }) {
     }
     console.log("Passed");
   };
+  const { mutate: deductItemQuantity, loadingDeduction } = useReduceQuantity();
+  const handleDeductQuantity = () => {
+    if (user?.id) {
+      console.log("TRUTH");
+      deductItemQuantity({
+        id: product.cart_id,
+        slug: product.slug as string,
+        user_id: +user.id,
+      });
+    }
+  };
+
   return (
     <div
       className={`${classes.product_item} text-white flex flex-col sm:flex-row justify-between gap-5 rounded-md max-h-fit w-full  sm:max-h-96 md:max-h-72 p-7 items-start `}
@@ -41,12 +57,12 @@ export default function ProductSingleCard({ product }) {
           fill
         />
       </div>
-      <section className="flex flex-col gap-10 sm:gap-5 h-full text-black  justify-evenly  sm:overflow-hidden ">
+      <section className="flex flex-col gap-10 sm:gap-5 h-full text-black  justify-evenly  sm:overflow-hidden">
         <h1 className="text-2xl  font-mono text-blue-500">{product?.name}</h1>
         <p className="text-sm text-gray-700 font-sans italic">
           {product?.description}
         </p>
-        <div className="actions flex justify-between gap-10 ">
+        <div className="actions flex justify-between gap-10 self-end">
           {product.quantity || product.inCart ? (
             <>
               {!product.cart_id && (
@@ -57,15 +73,22 @@ export default function ProductSingleCard({ product }) {
                   ORDER
                 </Link>
               )}
-              <span className="bg-white flex w-full sm:w-fit rounded-md">
-                <h1 className="w-full flex items-center border-2 border-green-600 rounded-l-md px-5">
+              <span className=" flex w-full sm:w-fit rounded-md h-10 place-self-end">
+                <button
+                  onClick={handleDeductQuantity}
+                  disabled={loadingDeduction}
+                  className="border-2 p-2 font-bold text-red-600 w-fit px-5 hover:bg-gray-50 transition-all duration-300 hover:text-purple-600"
+                >
+                  -
+                </button>
+                <h1 className="w-full flex items-center border-2   px-5">
                   {product.quantity && product.quantity}
                   {product.inCart && product.inCart}
                 </h1>
                 <button
                   onClick={handleAddQuantity}
                   disabled={isLoading}
-                  className="bg-green-600 border-2 border-green-600 p-2 rounded-r-sm font-bold text-white w-fit px-5"
+                  className="border-2 p-2 rounded-r-sm font-bold text-blue w-fit px-5  hover:bg-gray-50 transition-all duration-300 hover:text-green-600"
                 >
                   +
                 </button>

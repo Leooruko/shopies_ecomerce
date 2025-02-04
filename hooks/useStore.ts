@@ -61,9 +61,12 @@ export function useReduceQuantity(){
     const queryClient=useQueryClient();
 
     return useMutation({
-        mutationFn:async(id:number)=>deductItemQuantity(id),
+        mutationFn:async({id,slug,user_id}:{id:number,slug:string,user_id:number})=>deductItemQuantity(id),
         onSuccess:(_,variables)=>{
             queryClient.invalidateQueries({queryKey:['cart']})
+            console.log(variables.slug,variables.user_id,variables.id)
+            queryClient.invalidateQueries({ queryKey: ['store'] }); // Invalidate store
+            queryClient.invalidateQueries({ queryKey: ['product', variables.slug, variables.user_id] });
         }
     })
 }
